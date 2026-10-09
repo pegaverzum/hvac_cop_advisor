@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure HVAC COP & Thermal Advisor",
+        "description": "Set up thermodynamic COP/EER monitoring for your heat pump or air conditioner.",
+        "data": {
+          "name": "Device Name",
+          "climate_entity": "Target Climate Device",
+          "power_sensor": "Electrical Power Sensor (Watts)",
+          "outdoor_temp_sensor": "Outdoor Temperature Sensor (°C)",
+          "indoor_temp_sensor": "Indoor Temperature Sensor (°C)",
+          "weather_entity": "Weather Entity (Optional, for pre-heating forecast)",
+          "nominal_capacity_kw": "Nominal Capacity (kW)",
+          "nominal_cop": "Nominal COP (Heating efficiency)",
+          "nominal_eer": "Nominal EER (Cooling efficiency)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This climate device is already configured with HVAC COP Advisor."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HVAC COP Advisor Options",
+        "description": "Adjust thermodynamic tuning parameters and recommendation thresholds.",
+        "data": {
+          "nominal_capacity_kw": "Nominal Capacity (kW)",
+          "nominal_cop": "Nominal Heating COP",
+          "nominal_eer": "Nominal Cooling EER",
+          "k_cop": "Heating COP Slope Coefficient (k_cop)",
+          "k_eer": "Cooling EER Slope Coefficient (k_eer)",
+          "standby_threshold": "Standby Power Threshold (Watts)",
+          "cop_threshold": "Viable Heating COP Threshold",
+          "weather_entity": "Weather Entity (for pre-heating forecast)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "cop_eer": {
+        "name": "Instantaneous COP / EER"
+      },
+      "thermal_power": {
+        "name": "Thermal Output Power"
+      },
+      "modulation": {
+        "name": "Compressor Modulation"
+      },
+      "cumulative_electric_energy": {
+        "name": "Total Electric Energy Consumed"
+      },
+      "cumulative_thermal_energy": {
+        "name": "Total Thermal Energy Delivered"
+      },
+      "daily_cop": {
+        "name": "Daily Average COP"
+      }
+    },
+    "binary_sensor": {
+      "heat_recommended": {
+        "name": "Heating Recommended"
+      },
+      "preheating_advisor": {
+        "name": "Pre-Heating Recommended"
+      }
+    }
+  }
+}

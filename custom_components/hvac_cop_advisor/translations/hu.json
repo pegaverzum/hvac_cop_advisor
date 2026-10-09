@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "HVAC COP & Hőteljesítmény Tanácsadó Beállítása",
+        "description": "Termodinamikai COP/EER hatásfok és hőteljesítmény mérés beállítása klímához vagy hőszivattyúhoz.",
+        "data": {
+          "name": "Eszköz Neve",
+          "climate_entity": "Klíma / Hőszivattyú Entitás",
+          "power_sensor": "Villamos Teljesítmény Szenzor (Watt)",
+          "outdoor_temp_sensor": "Külső Hőmérséklet Szenzor (°C)",
+          "indoor_temp_sensor": "Belső Hőmérséklet Szenzor (°C)",
+          "weather_entity": "Időjárás Entitás (Opcionális, előfűtési előrejelzéshez)",
+          "nominal_capacity_kw": "Névleges Teljesítmény (kW)",
+          "nominal_cop": "Névleges COP (Fűtési hatásfok)",
+          "nominal_eer": "Névleges EER (Hűtési hatásfok)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Ez a klímaeszköz már hozzá van adva a HVAC COP Tanácsadóhoz."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HVAC COP Tanácsadó Finomhangolása",
+        "description": "Módosítsd a termodinamikai együtthatókat, készenléti határértéket és a fűtési javaslat küszöbét.",
+        "data": {
+          "nominal_capacity_kw": "Névleges Teljesítmény (kW)",
+          "nominal_cop": "Névleges Fűtési COP",
+          "nominal_eer": "Névleges Hűtési EER",
+          "k_cop": "Fűtési COP meredekségi szorzó (k_cop)",
+          "k_eer": "Hűtési EER meredekségi szorzó (k_eer)",
+          "standby_threshold": "Készenléti Fogyasztás Küszöb (Watt)",
+          "cop_threshold": "Gazdaságos Fűtési COP Küszöbérték",
+          "weather_entity": "Időjárás Entitás (előfűtési előrejelzéshez)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "cop_eer": {
+        "name": "Pillanatnyi COP / EER"
+      },
+      "thermal_power": {
+        "name": "Leadott Termikus Teljesítmény"
+      },
+      "modulation": {
+        "name": "Kompresszor Moduláció"
+      },
+      "cumulative_electric_energy": {
+        "name": "Összes Felhasznált Villamos Energia"
+      },
+      "cumulative_thermal_energy": {
+        "name": "Összes Leadott Termikus Energia"
+      },
+      "daily_cop": {
+        "name": "Napi Átlagos COP"
+      }
+    },
+    "binary_sensor": {
+      "heat_recommended": {
+        "name": "Fűtés Javasolt"
+      },
+      "preheating_advisor": {
+        "name": "Időjárás Alapú Előfűtés Javasolt"
+      }
+    }
+  }
+}
