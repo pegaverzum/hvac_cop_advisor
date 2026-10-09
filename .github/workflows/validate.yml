@@ -27,7 +27,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: HACS Action checks
-        uses: hacs/action/checks@main
+        uses: hacs/action@main
         with:
-          type: "integration"
           category: "integration"
