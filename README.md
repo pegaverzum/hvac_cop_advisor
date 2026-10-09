@@ -1,9 +1,9 @@
 # HVAC COP & Thermal Performance Advisor
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/hacs/default)
-[![GitHub Release](https://img.shields.io/github/v/release/custom-components/hvac_cop_advisor?style=for-the-badge)](https://github.com/custom-components/hvac_cop_advisor/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/pegaverzum/hvac_cop_advisor?style=for-the-badge)](https://github.com/pegaverzum/hvac_cop_advisor/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Hassfest Validation](https://img.shields.io/github/actions/workflow/status/custom-components/hvac_cop_advisor/validate.yml?label=Hassfest&style=for-the-badge)](https://github.com/custom-components/hvac_cop_advisor/actions)
+[![Hassfest Validation](https://img.shields.io/github/actions/workflow/status/pegaverzum/hvac_cop_advisor/validate.yml?label=Hassfest&style=for-the-badge)](https://github.com/pegaverzum/hvac_cop_advisor/actions)
 
 Production-grade Home Assistant custom integration that transforms any connected air conditioner or heat pump (monitored via a smart plug or energy meter) into an intelligent, thermodynamically-aware thermal power and efficiency station.
 
@@ -35,13 +35,13 @@ Calculates real-time **COP** (heating), **EER** (cooling), delivered **Thermal P
 ### Thermodynamic Models & Formulas
 
 #### 1. Temperature-Dependent Base Efficiency
-* **Heating Mode:**
+- **Heating Mode:**
   Reference nominal point: $+7^\circ\text{C}$ outdoor, $+20^\circ\text{C}$ indoor ($\Delta T_{ref} = 13^\circ\text{C}$).
   $$\Delta T = T_{indoor} - T_{outdoor}$$
   $$COP_{temp} = \text{clamp}\left(COP_{nominal} - k_{cop} \cdot (\Delta T - 13),\; 1.1,\; 6.0\right)$$
   *(Default $k_{cop} = 0.065$)*
 
-* **Cooling Mode:**
+- **Cooling Mode:**
   Reference nominal point: $+35^\circ\text{C}$ outdoor, $+27^\circ\text{C}$ indoor.
   $$EER_{temp} = \text{clamp}\left(EER_{nominal} - k_{eer} \cdot (T_{outdoor} - 35),\; 1.5,\; 6.5\right)$$
   *(Default $k_{eer} = 0.08$)*
@@ -55,7 +55,7 @@ $$\text{Modulation \%} = \min\left(150,\; \max\left(0,\; \frac{P_{measured\_watt
 
 Efficiency multiplier:
 - **Optimal partial load (30% to 65% modulation):**
-  $$Multiplier = 1.0 + 0.12 \cdot \left(1.0 - \left|\frac{\text{Modulation} - 47.5}{17.5}\right|\right)$$
+  $$Multiplier = 1.0 + 0.12 \cdot \left(1.0 - \left\vert{}\frac{\text{Modulation} - 47.5}{17.5}\right\vert{}\right)$$
 - **Nominal load (80% to 100%):** $Multiplier \approx 1.00$
 - **Overdrive (>100% to 150%):** Efficiency penalty down to $-20\%$
 
@@ -89,7 +89,7 @@ Energy accumulation uses Riemann trapezoidal summation with state restoration ac
 
 1. Open **Home Assistant** -> **HACS** -> **Integrations**.
 2. Click the three dots in the top right corner -> **Custom repositories**.
-3. Add the repository URL: `https://github.com/custom-components/hvac_cop_advisor`
+3. Add the repository URL: `https://github.com/pegaverzum/hvac_cop_advisor`
 4. Category: **Integration**.
 5. Click **Add**, find **HVAC COP & Thermal Advisor**, and click **Download**.
 6. Restart Home Assistant.
@@ -115,7 +115,7 @@ Energy accumulation uses Riemann trapezoidal summation with state restoration ac
 
 1. Nyisd meg a Home Assistantban a **HACS** -> **Integrációk** menüt.
 2. Kattints a jobb felső sarokban található három pontra -> **Egyéni tárolók (Custom repositories)**.
-3. Add meg a tároló URL-jét: `https://github.com/custom-components/hvac_cop_advisor`
+3. Add meg a tároló URL-jét: `https://github.com/pegaverzum/hvac_cop_advisor`
 4. Kategória: **Integráció (Integration)**.
 5. Kattints a **Hozzáadás** gombra, keresd meg a **HVAC COP & Thermal Advisor** elemet, majd válaszd a **Letöltés** lehetőséget.
 6. Indítsd újra a Home Assistantot.
