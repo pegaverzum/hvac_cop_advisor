@@ -1,26 +1,33 @@
-name: Validate Integration
+name: Validate
 
 on:
   push:
     branches:
       - main
   pull_request:
-    branches:
-      - main
   schedule:
     - cron: "0 0 * * *"
 
 jobs:
-  validate:
+  validate-hassfest:
+    name: Hassfest Validation
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: HACS Action
-        uses: hacs/action@main
-        with:
-          category: integration
-
-      - name: Hassfest
+      - name: Hassfest validation
         uses: home-assistant/actions/hassfest@master
+
+  validate-hacs:
+    name: HACS Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: HACS Action checks
+        uses: hacs/action/checks@main
+        with:
+          type: "integration"
+          category: "integration"
