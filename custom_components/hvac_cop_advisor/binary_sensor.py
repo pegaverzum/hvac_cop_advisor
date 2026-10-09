@@ -65,7 +65,7 @@ class HvacAdvisorBaseBinarySensor(
         return DeviceInfo(
             identifiers={(DOMAIN, self.coordinator.entry.entry_id)},
             name=self.coordinator.device_name,
-            manufacturer="HVAC Advisor",
+            manufacturer="pegaverzum",
             model="Thermodynamic COP Engine",
             entry_type=DeviceEntryType.SERVICE,
         )

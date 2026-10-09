@@ -9,6 +9,10 @@ Production-grade Home Assistant custom integration that transforms any connected
 
 Calculates real-time **COP** (heating), **EER** (cooling), delivered **Thermal Power (Watts)**, **Compressor Modulation (%)**, accumulated **kWh**, and provides an automated **Smart Pre-heating Advisor** based on upcoming weather forecasts.
 
+<p align="center">
+  <img src="images/data.png" alt="HVAC COP Advisor Sensors in Home Assistant" width="600">
+</p>
+
 ---
 
 > [!NOTE]
