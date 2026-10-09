@@ -142,9 +142,13 @@ class HvacCopAdvisorConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 class HvacCopAdvisorOptionsFlowHandler(config_entries.OptionsFlow):
     """Handle options flow for HVAC COP Advisor."""
 
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
+    def __init__(self, config_entry: config_entries.ConfigEntry | None = None) -> None:
         """Initialize options flow."""
-        self.config_entry = config_entry
+        if config_entry is not None:
+            try:
+                self.config_entry = config_entry
+            except AttributeError:
+                pass
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None

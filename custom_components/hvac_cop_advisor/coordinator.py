@@ -1,7 +1,7 @@
 """DataUpdateCoordinator for HVAC COP & Thermal Performance Advisor."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import logging
 from typing import Any
 
@@ -12,7 +12,10 @@ from homeassistant.helpers.event import (
     async_track_state_change_event,
     async_track_time_interval,
 )
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import (
+    DataUpdateCoordinator,
+    UpdateFailed,
+)
 from homeassistant.util import dt as dt_util
 
 from .const import (
@@ -104,10 +107,10 @@ class HvacCopAdvisorCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self.daily_thermal_kwh: float = 0.0
 
         # State tracking for integration
-        self._last_integration_time: datetime | dt_util.dt.datetime | None = None
+        self._last_integration_time: datetime | None = None
         self._last_electric_watts: float = 0.0
         self._last_thermal_watts: float = 0.0
-        self._last_date: datetime.date | None = None
+        self._last_date: date | None = None
 
         # Weather forecast cache
         self._last_forecast_time: datetime | None = None
@@ -121,7 +124,7 @@ class HvacCopAdvisorCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         )
 
     @property
-    def name(self) -> str:
+    def device_name(self) -> str:
         """Return the device name configured by the user."""
         return self.entry.data.get(CONF_NAME, DEFAULT_NAME)
 
@@ -455,10 +458,12 @@ class HvacCopAdvisorCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         temp_drop: float | None = None
         preheat_reason = ""
 
-        if forecasts and t_outdoor is not None:
+        if forecasts and t_outdoor is not None and isinstance(forecasts, list):
             # Check forecasts within lookahead hours
             temps: list[float] = []
             for item in forecasts[:FORECAST_LOOKAHEAD_HOURS]:
+                if not isinstance(item, dict):
+                    continue
                 temp_val = item.get("temperature")
                 if temp_val is not None:
                     try:

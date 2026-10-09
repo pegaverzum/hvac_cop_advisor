@@ -64,7 +64,7 @@ class HvacAdvisorBaseBinarySensor(
         """Return the device information associating this entity with the HVAC advisor device."""
         return DeviceInfo(
             identifiers={(DOMAIN, self.coordinator.entry.entry_id)},
-            name=self.coordinator.name,
+            name=self.coordinator.device_name,
             manufacturer="HVAC Advisor",
             model="Thermodynamic COP Engine",
             entry_type=DeviceEntryType.SERVICE,
